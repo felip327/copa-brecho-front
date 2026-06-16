@@ -314,17 +314,62 @@ function alterarQuantidade(index, delta) {
 }
 
 // ========================================================
-// FINALIZAR COMPRA — processa todos os itens via API
+// SISTEMA DE CHECKOUT MODAL
 // ========================================================
-async function finalizarCompra() {
+function finalizarCompra() {
     if (carrinho.length === 0) return;
 
-    const btn = document.getElementById('checkout-btn');
+    // Fechar drawer e abrir modal de checkout
+    toggleCarrinho();
+    
+    const modal = document.getElementById('checkout-modal');
+    const overlay = document.getElementById('checkout-overlay');
+    const totalVal = document.getElementById('checkout-total-val');
+    
+    const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
+    totalVal.textContent = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    modal.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function fecharCheckout() {
+    document.getElementById('checkout-modal').classList.remove('open');
+    document.getElementById('checkout-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+// Gera um UUID (v4) falso temporário para simular um ID de usuário anônimo
+function gerarUUIDFalso() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
+// ========================================================
+// CONFIRMAR COMPRA — processa todos os itens via API
+// ========================================================
+async function confirmarCompra(event) {
+    event.preventDefault(); // Impede o formulário de recarregar a página
+
+    if (carrinho.length === 0) return;
+
+    // Pegar dados do formulário
+    const nome = document.getElementById('checkout-nome').value;
+    const email = document.getElementById('checkout-email').value;
+    const endereco = document.getElementById('checkout-endereco').value;
+
+    const btn = document.getElementById('confirm-purchase-btn');
     btn.disabled = true;
-    btn.textContent = '⏳ Processando...';
+    btn.textContent = '⏳ Processando Pagamento...';
 
     let sucesso = 0;
     let erros = 0;
+
+    // Cria um ID falso pois o usuário não está logado
+    const compradorIdFake = gerarUUIDFalso();
 
     for (const item of carrinho) {
         try {
@@ -333,8 +378,9 @@ async function finalizarCompra() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     produto_id: item.id,
-                    comprador_id: 1,
-                    quantidade: item.quantidade
+                    comprador_id: compradorIdFake, // Precisa ser um UUID para o backend não dar erro de syntax
+                    quantidade: item.quantidade,
+                    cliente: { nome, email, endereco }
                 })
             });
 
@@ -360,16 +406,17 @@ console.log('Resposta da API:', resultado);
             atualizarDrawerCarrinho();
 
             btn.disabled = false;
-            btn.textContent = '🏆 Finalizar Compra';
+            btn.innerHTML = '✅ Confirmar Pagamento';
 
-            // Fechar drawer
-            toggleCarrinho();
+            // Fechar modal de checkout
+            fecharCheckout();
+            document.getElementById('checkout-form').reset();
 
             // Feedback
             if (erros === 0) {
-                showToast(`🏆 ${sucesso} ${sucesso === 1 ? 'compra processada' : 'compras processadas'} com sucesso!`, 'success', 4000);
+                showToast(`🏆 Pagamento aprovado! Obrigado, ${nome.split(' ')[0]}!`, 'success', 5000);
             } else {
-                showToast(`${sucesso} processadas, ${erros} com erro. Tente novamente.`, 'error', 5000);
+                showToast(`${sucesso} processadas, mas tivemos ${erros} erro(s).`, 'error', 5000);
             }
         }
 
