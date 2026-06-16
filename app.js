@@ -1,7 +1,7 @@
 // ========================================================
 // CONFIGURAÇÕES DE CONEXÃO
 // ========================================================
-const API_URL = 'https://copa-brecho-backend.vercel.app'; // URL do Backend Node.js (local)
+const API_URL = 'https://copa-brecho-back-felip327s-projects.vercel.app'; // URL do Backend Node.js na Vercel
 
 // Credenciais do Supabase (para Realtime)
 const SUPABASE_URL = 'https://gdmkeiqtdvlytmwvrzdh.supabase.co';
