@@ -4,11 +4,11 @@
 const API_URL = 'https://copa-brecho-backend.vercel.app'; // URL do Backend Node.js (local)
 
 // Credenciais do Supabase (para Realtime)
-const SUPABASE_URL = 'https://kdciiafpksfellfaojtv.supabase.co';
-const SUPABASE_ANON_KEY = 'sb_publishable_RaySXBAFILjPNPCPtkeaNA_cb8HMoSN';
+const SUPABASE_URL = 'https://gdmkeiqtdvlytmwvrzdh.supabase.co';
+const SUPABASE_SERVICE_ROLE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdkbWtlaXF0ZHZseXRtd3ZyemRoIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MTU3NzA1NCwiZXhwIjoyMDk3MTUzMDU0fQ.1u_NOkVEYOdzWom3OUaDW8BYoNSmfX3ypMbJFJKS4pc';
 
 // Inicializa o cliente Supabase no Frontend
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
 // ========================================================
 // ESTADO GLOBAL
