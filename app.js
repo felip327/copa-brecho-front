@@ -447,5 +447,4 @@ function inicializarRealtime() {
                     }
                 })
                 .subscribe();
-            }
-        }
+}
