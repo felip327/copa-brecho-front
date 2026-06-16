@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado da Copa ⚽ Brechó Esportivo</title>
+    <meta name="description" content="Brechó de relíquias esportivas — camisas, casacos e bonés clássicos de Copas do Mundo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================
+           DESIGN SYSTEM — ESTÁDIO BRASIL
+        ========================================== */
+        :root {
+            /* Verde Bandeira */
+            --green-900: #003d1a;
+            --green-800: #005a27;
+            --green-700: #007a33;
+            --green-600: #009b3a;
+            --green-500: #00b847;
+            --green-400: #2dd264;
+            --green-300: #6ee697;
+            --green-200: #b0f0c8;
+            --green-100: #ddfbe8;
+            --green-50: #f0fdf4;
+
+            /* Amarelo Ouro */
+            --gold-600: #ca8a04;
+            --gold-500: #eab308;
+            --gold-400: #facc15;
+            --gold-300: #fde047;
+            --gold-200: #fef08a;
+            --gold-100: #fef9c3;
+            --gold-50: #fefce8;
+
+            /* Azul Detalhe */
+            --blue-800: #002776;
+            --blue-700: #003399;
+            --blue-600: #1447b5;
+            --blue-500: #2563eb;
+            --blue-400: #60a5fa;
+            --blue-100: #dbeafe;
+
+            /* Neutros */
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --gray-800: #262626;
+            --gray-900: #171717;
+            --gray-950: #0a0a0a;
+
+            /* Feedback */
+            --success: #22c55e;
+            --error: #ef4444;
+
+            /* Sombras */
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+            --shadow-xl: 0 16px 40px rgba(0,0,0,0.12);
+            --shadow-card-hover: 0 20px 50px rgba(0, 155, 58, 0.15), 0 8px 20px rgba(0,0,0,0.08);
+            --shadow-green-glow: 0 4px 20px rgba(0, 155, 58, 0.25);
+            --shadow-gold-glow: 0 4px 16px rgba(234, 179, 8, 0.3);
+
+            /* Transições */
+            --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+            --fast: 200ms;
+            --normal: 350ms;
+            --slow: 500ms;
+
+            /* Raios */
+            --r-sm: 8px;
+            --r-md: 12px;
+            --r-lg: 16px;
+            --r-xl: 20px;
+            --r-2xl: 24px;
+            --r-full: 9999px;
+        }
+
+        /* ==========================================
+           RESET
+        ========================================== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-800);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        img { display: block; max-width: 100%; }
+        button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+        /* ==========================================
+           HEADER — BARRA VERDE BANDEIRA
+        ========================================== */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: linear-gradient(135deg, var(--green-800) 0%, var(--green-700) 50%, var(--green-600) 100%);
+            box-shadow: 0 2px 12px rgba(0, 90, 39, 0.35);
+        }
+
+        /* Faixa amarela fina no topo */
+        .header::before {
+            content: '';
+            display: block;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-400), var(--gold-500), var(--gold-400));
+        }
+
+        .header-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            height: 68px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-group { display: flex; flex-direction: column; gap: 1px; }
+
+        .logo-title {
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: var(--white);
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .logo-title .emoji-ball {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: var(--gold-400);
+            border-radius: var(--r-full);
+            font-size: 1rem;
+            box-shadow: var(--shadow-gold-glow);
+        }
+
+        .logo-subtitle {
+            font-size: 0.6rem;
+            color: var(--green-200);
+            text-transform: uppercase;
+            letter-spacing: 0.18em;
+            font-weight: 700;
+        }
+
+        .cart-btn {
+            position: relative;
+            width: 46px;
+            height: 46px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--r-md);
+            transition: all var(--fast) var(--ease-out);
+        }
+
+        .cart-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .cart-btn:active { transform: scale(0.92); }
+
+        .cart-btn svg {
+            width: 22px;
+            height: 22px;
+            color: var(--white);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            background: var(--gold-400);
+            color: var(--green-900);
+            font-size: 0.65rem;
+            font-weight: 900;
+            width: 20px;
+            height: 20px;
+            border-radius: var(--r-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--green-700);
+            box-shadow: var(--shadow-gold-glow);
+            transition: transform var(--fast) var(--ease-spring);
+        }
+
+        .cart-badge.pulse {
+            animation: badge-pop 0.45s var(--ease-spring);
+        }
+
+        @keyframes badge-pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5) rotate(-8deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
+
+        /* ==========================================
+           MAIN
+        ========================================== */
+        .main-content {
+            max-width: 1280px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        /* ==========================================
+           HERO — CAMPO DE FUTEBOL
+        ========================================== */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, var(--green-600) 0%, var(--green-700) 40%, var(--green-800) 100%);
+            border-radius: var(--r-2xl);
+            padding: 2.5rem;
+            color: var(--white);
+            overflow: hidden;
+            box-shadow: var(--shadow-green-glow);
+            margin-bottom: 2rem;
+            border: 2px solid var(--green-500);
+        }
+
+        /* Linhas do campo */
+        .hero::before {
+            content: '';
+            position: absolute;
+            right: 40px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.08);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: rgba(255,255,255,0.06);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 520px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--gold-400);
+            color: var(--green-900);
+            font-size: 0.6rem;
+            font-weight: 900;
+            padding: 5px 12px;
+            border-radius: var(--r-full);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 14px;
+            box-shadow: var(--shadow-gold-glow);
+        }
+
+        .hero-badge::before {
+            content: '⭐';
+            font-size: 0.7rem;
+        }
+
+        .hero-title {
+            font-weight: 900;
+            font-size: clamp(1.6rem, 4.5vw, 2.6rem);
+            text-transform: uppercase;
+            letter-spacing: -0.03em;
+            line-height: 1.05;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .hero-title span {
+            color: var(--gold-300);
+        }
+
+        .hero-desc {
+            font-size: 0.9rem;
+            color: var(--green-100);
+            font-weight: 500;
+            line-height: 1.6;
+            max-width: 420px;
+        }
+
+        /* Estrelas decorativas */
+        .hero-stars {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            gap: 4px;
+            opacity: 0.15;
+            font-size: 2rem;
+            pointer-events: none;
+        }
+
+        /* ==========================================
+           FILTROS
+        ========================================== */
+        .filters-section {
+            margin-bottom: 1.75rem;
+        }
+
+        .filters-row {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 4px 0;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .filters-row::-webkit-scrollbar { display: none; }
+
+        .filter-btn {
+            padding: 10px 22px;
+            border-radius: var(--r-full);
+            font-size: 0.8rem;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: all var(--fast) var(--ease-out);
+            border: 2px solid var(--gray-200);
+            background: var(--white);
+            color: var(--gray-600);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--green-400);
+            color: var(--green-700);
+            background: var(--green-50);
+        }
+
+        .filter-btn.active {
+            background: var(--green-600);
+            color: var(--white);
+            border-color: var(--green-600);
+            box-shadow: var(--shadow-green-glow);
+            transform: scale(1.03);
+        }
+
+        /* ==========================================
+           SEÇÃO PRODUTOS
+        ========================================== */
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .products-title {
+            font-weight: 900;
+            font-size: 1.2rem;
+            color: var(--gray-900);
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+        }
+
+        .realtime-badge {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--green-700);
+            background: var(--green-100);
+            padding: 6px 14px;
+            border-radius: var(--r-full);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--green-200);
+        }
+
+        .realtime-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green-500);
+            box-shadow: 0 0 6px var(--green-500);
+            animation: live-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes live-pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 6px var(--green-500); }
+            50% { opacity: 0.4; box-shadow: 0 0 2px var(--green-500); }
+        }
+
+        /* ==========================================
+           GRID
+        ========================================== */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (min-width: 640px) {
+            .products-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+        }
+
+        @media (min-width: 1024px) {
+            .products-grid { grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        }
+
+        /* ==========================================
+           CARD DE PRODUTO
+        ========================================== */
+        .product-card {
+            background: var(--white);
+            border-radius: var(--r-xl);
+            border: 2px solid var(--gray-200);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all var(--normal) var(--ease-out);
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: var(--shadow-card-hover);
+            border-color: var(--green-400);
+        }
+
+        /* Faixa amarela topo do card */
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-400), var(--green-500), var(--gold-400));
+            opacity: 0;
+            transition: opacity var(--fast);
+            z-index: 5;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-image-wrapper {
+            position: relative;
+            padding-bottom: 115%;
+            background: linear-gradient(135deg, var(--gray-100), var(--gray-50));
+            overflow: hidden;
+        }
+
+        .card-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--slow) var(--ease-out);
+        }
+
+        .product-card:hover .card-image {
+            transform: scale(1.08);
+        }
+
+        .card-category-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--green-700);
+            color: var(--white);
+            font-size: 0.55rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: var(--r-full);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 2;
+        }
+
+        .card-body {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .card-info { display: flex; flex-direction: column; gap: 4px; }
+
+        .card-title {
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--gray-900);
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            transition: color var(--fast);
+        }
+
+        .product-card:hover .card-title {
+            color: var(--green-700);
+        }
+
+        .card-desc {
+            font-size: 0.72rem;
+            color: var(--gray-400);
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 0.75rem;
+            border-top: 2px dashed var(--gray-100);
+        }
+
+        .card-price {
+            font-weight: 900;
+            font-size: 1.05rem;
+            color: var(--green-700);
+        }
+
+        .add-cart-btn {
+            background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+            color: var(--green-900);
+            font-weight: 900;
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 8px 14px;
+            border-radius: var(--r-full);
+            transition: all var(--fast) var(--ease-spring);
+            box-shadow: var(--shadow-gold-glow);
+        }
+
+        .add-cart-btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(234, 179, 8, 0.4);
+        }
+
+        .add-cart-btn:active { transform: scale(0.93); }
+
+        /* ==========================================
+           SKELETON LOADING
+        ========================================== */
+        .skeleton-grid { display: contents; }
+
+        .skeleton-card {
+            background: var(--white);
+            border-radius: var(--r-xl);
+            border: 2px solid var(--gray-200);
+            overflow: hidden;
+        }
+
+        .skeleton-image {
+            padding-bottom: 115%;
+            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-50) 50%, var(--gray-100) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
+
+        .skeleton-body { padding: 1rem; display: flex; flex-direction: column; gap: 8px; }
+
+        .skeleton-line {
+            height: 12px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, var(--gray-100) 25%, var(--gray-50) 50%, var(--gray-100) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s ease-in-out infinite;
+        }
+
+        .skeleton-line.short { width: 55%; }
+        .skeleton-line.medium { width: 80%; }
+
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ==========================================
+           OVERLAY + DRAWER DO CARRINHO
+        ========================================== */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 61, 26, 0.45);
+            backdrop-filter: blur(6px);
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--normal) var(--ease-out);
+        }
+
+        .overlay.open { opacity: 1; visibility: visible; }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 420px;
+            background: var(--white);
+            z-index: 300;
+            transform: translateX(100%);
+            transition: transform var(--normal) var(--ease-out);
+            display: flex;
+            flex-direction: column;
+            box-shadow: -10px 0 50px rgba(0,0,0,0.15);
+        }
+
+        .cart-drawer.open { transform: translateX(0); }
+
+        .drawer-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 2px solid var(--gray-100);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(135deg, var(--green-50), var(--white));
+        }
+
+        /* Faixa amarela no drawer */
+        .drawer-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-400), var(--green-500));
+        }
+
+        .drawer-title {
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .drawer-count {
+            font-size: 0.65rem;
+            font-weight: 800;
+            background: var(--green-600);
+            color: var(--white);
+            padding: 3px 10px;
+            border-radius: var(--r-full);
+        }
+
+        .close-drawer-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--r-sm);
+            color: var(--gray-500);
+            transition: all var(--fast);
+        }
+
+        .close-drawer-btn:hover { background: var(--gray-100); color: var(--gray-800); }
+
+        .drawer-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 1rem 1.5rem;
+        }
+
+        .cart-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--gray-400);
+            gap: 10px;
+            text-align: center;
+        }
+
+        .cart-empty-icon { font-size: 3.5rem; opacity: 0.4; }
+        .cart-empty-text { font-size: 0.85rem; font-weight: 700; }
+
+        .cart-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--gray-100);
+            animation: item-slide 0.35s var(--ease-out);
+        }
+
+        @keyframes item-slide {
+            from { opacity: 0; transform: translateX(24px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .cart-item-img {
+            width: 64px;
+            height: 64px;
+            border-radius: var(--r-md);
+            object-fit: cover;
+            flex-shrink: 0;
+            border: 2px solid var(--gray-200);
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2px;
+            min-width: 0;
+        }
+
+        .cart-item-title {
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: var(--gray-900);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .cart-item-price {
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--green-700);
+        }
+
+        .cart-item-remove {
+            align-self: center;
+            width: 34px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--r-sm);
+            color: var(--gray-400);
+            flex-shrink: 0;
+            transition: all var(--fast);
+        }
+
+        .cart-item-remove:hover { background: rgba(239, 68, 68, 0.1); color: var(--error); }
+
+        .drawer-footer {
+            padding: 1.25rem 1.5rem;
+            border-top: 2px solid var(--gray-100);
+            background: var(--gray-50);
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .cart-total-label { font-size: 0.85rem; font-weight: 600; color: var(--gray-500); }
+
+        .cart-total-value { font-size: 1.3rem; font-weight: 900; color: var(--green-700); }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--green-600), var(--green-700));
+            color: var(--white);
+            font-weight: 900;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border-radius: var(--r-full);
+            transition: all var(--fast) var(--ease-spring);
+            box-shadow: var(--shadow-green-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 8px 24px rgba(0, 155, 58, 0.35);
+        }
+
+        .checkout-btn:active { transform: scale(0.97); }
+        .checkout-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* ==========================================
+           TOAST NOTIFICATIONS
+        ========================================== */
+        .toast-container {
+            position: fixed;
+            top: 88px;
+            right: 1rem;
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            pointer-events: none;
+        }
+
+        .toast {
+            background: var(--gray-900);
+            color: var(--white);
+            padding: 14px 20px;
+            border-radius: var(--r-lg);
+            font-size: 0.8rem;
+            font-weight: 600;
+            box-shadow: var(--shadow-xl);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            pointer-events: auto;
+            animation: toast-in 0.4s var(--ease-out), toast-out 0.35s var(--ease-out) forwards;
+            animation-delay: 0s, var(--toast-duration, 3s);
+            max-width: 360px;
+        }
+
+        .toast.success { border-left: 4px solid var(--green-500); }
+        .toast.error { border-left: 4px solid var(--error); }
+        .toast.info { border-left: 4px solid var(--gold-400); }
+
+        @keyframes toast-in {
+            from { opacity: 0; transform: translateX(40px) scale(0.92); }
+            to { opacity: 1; transform: translateX(0) scale(1); }
+        }
+
+        @keyframes toast-out {
+            from { opacity: 1; transform: translateX(0) scale(1); }
+            to { opacity: 0; transform: translateX(40px) scale(0.92); }
+        }
+
+        /* ==========================================
+           FOOTER — ESTILO ESTÁDIO
+        ========================================== */
+        .footer {
+            background: var(--green-800);
+            color: var(--white);
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Faixa amarela no topo do footer */
+        .footer::before {
+            content: '';
+            display: block;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold-400), var(--green-500), var(--gold-400));
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-brand {
+            font-weight: 900;
+            font-size: 1rem;
+            color: var(--gold-400);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-text {
+            font-size: 0.72rem;
+            color: var(--green-300);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .footer-techs {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-tech {
+            font-size: 0.55rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: var(--r-full);
+            background: rgba(255,255,255,0.1);
+            color: var(--green-200);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .footer-stars {
+            display: flex;
+            gap: 4px;
+            font-size: 1rem;
+            opacity: 0.3;
+        }
+
+        /* ==========================================
+           ESTADOS VAZIOS / ERRO
+        ========================================== */
+        .empty-state, .error-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .empty-state { color: var(--gray-400); }
+        .error-state { color: var(--error); }
+
+        /* ==========================================
+           RESPONSIVO
+        ========================================== */
+        @media (min-width: 768px) {
+            .hero { padding: 3rem 3.5rem; }
+            .main-content { padding: 2rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero { padding: 1.75rem; }
+            .card-body { padding: 0.75rem; }
+            .card-price { font-size: 0.9rem; }
+            .add-cart-btn { font-size: 0.58rem; padding: 7px 10px; }
+            .cart-drawer { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo-group">
+                <h1 class="logo-title">
+                    <span class="emoji-ball">⚽</span> MERCADO DA COPA
+                </h1>
+                <p class="logo-subtitle">Brechó de Relíquias Esportivas</p>
+            </div>
+            <button class="cart-btn" onclick="toggleCarrinho()" aria-label="Abrir carrinho">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <span id="carrinho-badge" class="cart-badge">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-content">
+                <span class="hero-badge">PROJETO INTEGRADOR</span>
+                <h2 class="hero-title">
+                    Mantos Históricos<br><span>Prontos pro Jogo</span>
+                </h2>
+                <p class="hero-desc">
+                    Explore o estoque e garanta jaquetas, bonés e camisas clássicas de Copas passadas. Relíquias com história pra contar.
+                </p>
+            </div>
+            <div class="hero-stars">⭐⭐⭐⭐⭐</div>
+        </section>
+
+        <!-- FILTROS -->
+        <section class="filters-section">
+            <div class="filters-row">
+                <button class="filter-btn active" data-categoria="todos" onclick="filtrarPorCategoria('todos', this)">
+                    ⚽ Todos os Itens
+                </button>
+                <button class="filter-btn" data-categoria="camisa" onclick="filtrarPorCategoria('camisa', this)">
+                    🇧🇷 Camisas
+                </button>
+                <button class="filter-btn" data-categoria="casaco" onclick="filtrarPorCategoria('casaco', this)">
+                    🧥 Casacos
+                </button>
+                <button class="filter-btn" data-categoria="bone" onclick="filtrarPorCategoria('bone', this)">
+                    🧢 Bonés
+                </button>
+            </div>
+        </section>
+
+        <!-- PRODUTOS -->
+        <section>
+            <div class="products-header">
+                <h3 class="products-title">🔥 Relíquias Disponíveis</h3>
+                <span class="realtime-badge">
+                    <span class="realtime-dot"></span>
+                    Atualizado em Tempo Real
+                </span>
+            </div>
+            <div id="grid-produtos" class="products-grid">
+                <div class="skeleton-grid" id="skeleton-loader">
+                    <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div><div class="skeleton-line"></div></div></div>
+                    <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div><div class="skeleton-line"></div></div></div>
+                    <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div><div class="skeleton-line"></div></div></div>
+                    <div class="skeleton-card"><div class="skeleton-image"></div><div class="skeleton-body"><div class="skeleton-line medium"></div><div class="skeleton-line short"></div><div class="skeleton-line"></div></div></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="cart-overlay" onclick="toggleCarrinho()"></div>
+
+    <!-- DRAWER DO CARRINHO -->
+    <aside class="cart-drawer" id="cart-drawer">
+        <div class="drawer-header">
+            <div class="drawer-title">
+                🛒 Seu Carrinho
+                <span class="drawer-count" id="drawer-count">0 itens</span>
+            </div>
+            <button class="close-drawer-btn" onclick="toggleCarrinho()" aria-label="Fechar carrinho">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+        <div class="drawer-body" id="cart-items"></div>
+        <div class="drawer-footer" id="cart-footer" style="display: none;">
+            <div class="cart-total-row">
+                <span class="cart-total-label">Total</span>
+                <span class="cart-total-value" id="cart-total">R$ 0,00</span>
+            </div>
+            <button class="checkout-btn" id="checkout-btn" onclick="finalizarCompra()">
+                🏆 Finalizar Compra
+            </button>
+        </div>
+    </aside>
+
+    <!-- TOASTS -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <span class="footer-brand">⚽ Mercado da Copa</span>
+            <p class="footer-text">&copy; 2026 — Projeto Acadêmico de E-commerce com Backend Node.js</p>
+            <div class="footer-techs">
+                <span class="footer-tech">Supabase</span>
+                <span class="footer-tech">Node.js</span>
+                <span class="footer-tech">Express</span>
+                <span class="footer-tech">Realtime</span>
+                <span class="footer-tech">Vercel</span>
+            </div>
+            <div class="footer-stars">⭐⭐⭐⭐⭐</div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js"></script>
+</body>
+</html>
