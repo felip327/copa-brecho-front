@@ -395,30 +395,31 @@ console.log('Resposta da API:', resultado);
             }
 
         } catch (error) {
-                console.error(error);
-                erros++;
-            }
-
-            // Limpar carrinho
-            carrinho = [];
-            salvarCarrinhoNoStorage();
-            atualizarBadge();
-            atualizarDrawerCarrinho();
-
-            btn.disabled = false;
-            btn.innerHTML = '✅ Confirmar Pagamento';
-
-            // Fechar modal de checkout
-            fecharCheckout();
-            document.getElementById('checkout-form').reset();
-
-            // Feedback
-            if (erros === 0) {
-                showToast(`🏆 Pagamento aprovado! Obrigado, ${nome.split(' ')[0]}!`, 'success', 5000);
-            } else {
-                showToast(`${sucesso} processadas, mas tivemos ${erros} erro(s).`, 'error', 5000);
-            }
+            console.error(error);
+            erros++;
         }
+    }
+
+    // Limpar carrinho
+    carrinho = [];
+    salvarCarrinhoNoStorage();
+    atualizarBadge();
+    atualizarDrawerCarrinho();
+
+    btn.disabled = false;
+    btn.innerHTML = '✅ Confirmar Pagamento';
+
+    // Fechar modal de checkout
+    fecharCheckout();
+    document.getElementById('checkout-form').reset();
+
+    // Feedback
+    if (erros === 0) {
+        showToast(`🏆 Pagamento aprovado! Obrigado, ${nome.split(' ')[0]}!`, 'success', 5000);
+    } else {
+        showToast(`${sucesso} processadas, mas tivemos ${erros} erro(s).`, 'error', 5000);
+    }
+}
 
 // ========================================================
 // SUPABASE REALTIME
