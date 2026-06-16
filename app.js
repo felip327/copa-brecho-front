@@ -165,6 +165,7 @@ function carregarCarrinhoDoStorage() {
     try {
         const salvo = localStorage.getItem('copa_carrinho');
         carrinho = salvo ? JSON.parse(salvo) : [];
+        carrinho.forEach(item => { if (!item.quantidade) item.quantidade = 1; });
     } catch {
         carrinho = [];
     }
@@ -179,11 +180,19 @@ function adicionarAoCarrinho(id, titulo, preco, imagem, categoria) {
     // Verificar se já está no carrinho
     const jaExiste = carrinho.find(item => item.id === id);
     if (jaExiste) {
-        showToast('Este item já está no carrinho!', 'info');
+        if (jaExiste.quantidade < 10) {
+            jaExiste.quantidade++;
+            salvarCarrinhoNoStorage();
+            atualizarBadge();
+            atualizarDrawerCarrinho();
+            showToast(`Mais um "${titulo}" adicionado!`, 'success');
+        } else {
+            showToast('Limite máximo de 10 itens atingido.', 'error');
+        }
         return;
     }
 
-    carrinho.push({ id, titulo, preco, imagem, categoria });
+    carrinho.push({ id, titulo, preco, imagem, categoria, quantidade: 1 });
     salvarCarrinhoNoStorage();
     atualizarBadge();
     atualizarDrawerCarrinho();
@@ -211,7 +220,7 @@ function removerDoCarrinho(index) {
 
 function atualizarBadge() {
     const badge = document.getElementById('carrinho-badge');
-    badge.textContent = carrinho.length;
+    badge.textContent = carrinho.reduce((acc, item) => acc + (item.quantidade || 1), 0);
 }
 
 function toggleCarrinho() {
@@ -238,7 +247,8 @@ function atualizarDrawerCarrinho() {
     const drawerCount = document.getElementById('drawer-count');
     const totalEl = document.getElementById('cart-total');
 
-    drawerCount.textContent = `${carrinho.length} ${carrinho.length === 1 ? 'item' : 'itens'}`;
+    const totalItens = carrinho.reduce((acc, item) => acc + (item.quantidade || 1), 0);
+    drawerCount.textContent = `${totalItens} ${totalItens === 1 ? 'item' : 'itens'}`;
 
     if (carrinho.length === 0) {
         itemsContainer.innerHTML = `
@@ -254,13 +264,18 @@ function atualizarDrawerCarrinho() {
     footer.style.display = 'block';
 
     itemsContainer.innerHTML = carrinho.map((item, index) => {
-        const preco = item.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const preco = (item.preco * item.quantidade).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         return `
             <div class="cart-item">
                 <img src="${item.imagem}" alt="${item.titulo}" class="cart-item-img">
                 <div class="cart-item-info">
                     <span class="cart-item-title">${item.titulo}</span>
                     <span class="cart-item-price">${preco}</span>
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="alterarQuantidade(${index}, -1)">-</button>
+                        <span class="qty-val">${item.quantidade}</span>
+                        <button class="qty-btn" onclick="alterarQuantidade(${index}, 1)">+</button>
+                    </div>
                 </div>
                 <button class="cart-item-remove" onclick="removerDoCarrinho(${index})" aria-label="Remover item">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -272,8 +287,30 @@ function atualizarDrawerCarrinho() {
     }).join('');
 
     // Total
-    const total = carrinho.reduce((acc, item) => acc + item.preco, 0);
+    const total = carrinho.reduce((acc, item) => acc + (item.preco * item.quantidade), 0);
     totalEl.textContent = total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+
+function alterarQuantidade(index, delta) {
+    const item = carrinho[index];
+    if (!item) return;
+
+    let novaQtd = item.quantidade + delta;
+
+    if (novaQtd < 1) {
+        removerDoCarrinho(index);
+        return;
+    }
+
+    if (novaQtd > 10) {
+        showToast('Limite máximo de 10 itens atingido.', 'error');
+        return;
+    }
+
+    item.quantidade = novaQtd;
+    salvarCarrinhoNoStorage();
+    atualizarBadge();
+    atualizarDrawerCarrinho();
 }
 
 // ========================================================
@@ -296,7 +333,8 @@ async function finalizarCompra() {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     produto_id: item.id,
-                    comprador_id: 1
+                    comprador_id: 1,
+                    quantidade: item.quantidade
                 })
             });
 
